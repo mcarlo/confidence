@@ -4,7 +4,7 @@ load("fansimsSkeleton.RData")
 load("altStuff.RData")
 source("data_to_load.R") #getwd()
 
-processFile("~/WEEK07test_2015.csv")  #
+processFile("~/WEEK07_2015.csv")  #
 #processFile("D:/WTP/WEEK01_2015test13.csv") #"2014week15.csv")
 
 simDogs <- simDogs16
