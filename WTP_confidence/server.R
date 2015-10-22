@@ -1,9 +1,6 @@
-#rm(list = ls())
 library(shiny); library(scales)
 require(googleVis)
-#setwd("C:/Users/Anichini/Documents/GitHub/fs2") #
-#setwd("D:/Documents/GitHub/fs2")
-load("useWeeklyFile2015_04.RData")
+load("useWeeklyFile2015_07.RData")
 nGames <- length(gameRanks)
 
 favorites <- weekFileConf$Victor
@@ -16,7 +13,7 @@ shinyServer(function(input, output) { # input <- data.frame(players = 25, first 
   #results <- calcWinners(input$players)
 
   winDollars <- reactive({round(as.data.frame(t((results() %*% c(input$first, input$second, input$third)))), 1)})
-  # winDollars <- round(as.data.frame(t((results %*% c(input$first, input$second, input$third)))), 1)
+  # winDollars <- round(as.data.frame(t((results() %*% c(input$first, input$second, input$third)))), 1)
 
   inTheMoney <- reactive({round(rowSums(results() %*% (1*(c(input$first, input$second, input$third) > 0))), 2)})
   # inTheMoney <- round(rowSums(results %*% (1*(c(input$first, input$second, input$third) > 0))), 2)
