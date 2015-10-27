@@ -4,7 +4,7 @@ load("fansimsSkeleton.RData")
 load("altStuff.RData")
 source("data_to_load.R") #getwd()
 
-processFile("~/WEEK07_2015.csv")  #
+processFile("~/WEEK08_2015.csv")  #
 #processFile("D:/WTP/WEEK01_2015test13.csv") #"2014week15.csv")
 
 simDogs <- simDogs16
@@ -53,4 +53,4 @@ confTactics <- function(startList, maxSize = 100){
 }
 system.time(resultsLists <- confTactics(results05))
 #setwd("D:/Documents/GitHub/fs2/weeklyApp_confidence")
-save(resultsLists, gameRanks, strategies, weekFileConf, file = "WTP_confidence/useWeeklyFile2015_07.RData")
+save(resultsLists, gameRanks, strategies, weekFileConf, file = "WTP_confidence/useWeeklyFile2015_08.RData")

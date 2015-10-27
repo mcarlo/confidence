@@ -1,8 +1,8 @@
 name: WTP_confidence
 account: portfoliowizards
 server: shinyapps.io
-bundleId: 294646
+bundleId: 299188
 url: https://winthatpool.shinyapps.io/WTP_confidence
-when: 1445538786.73498
+when: 1445973321.70125
 asMultiple: FALSE
 asStatic: FALSE

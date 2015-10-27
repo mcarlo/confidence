@@ -1,6 +1,6 @@
 library(shiny); library(scales)
 require(googleVis)
-load("useWeeklyFile2015_07.RData")
+load("useWeeklyFile2015_08.RData")
 nGames <- length(gameRanks)
 
 favorites <- weekFileConf$Victor

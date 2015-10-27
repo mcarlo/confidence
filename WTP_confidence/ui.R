@@ -23,8 +23,8 @@ shinyUI(fluidPage(
 
            fluidRow(
              column(6,
-                    h4("Highest average payoff, Week 7"),
-                    p("Final udate 10/22/16 11:40a PDT"),
+                    h4("Highest average payoff, Week 8"),
+                    p("Updated 10/27/16 12:15p PDT"),
                     htmlOutput(outputId="gSlate1")
                     ,
                     tags$head(tags$style(type="text/css",
