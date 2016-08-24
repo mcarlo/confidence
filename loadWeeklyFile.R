@@ -1,11 +1,13 @@
 ###
 rm(list = ls())
+weekNum <- 1
+csvFile <- paste0("D:/WTP/WEEK0", weekNum, "_2016.csv" )
 load("fansimsSkeleton.RData")
 load("altStuff.RData")
 source("data_to_load.R") #getwd()
 
-processFile("~/WEEK08_2015.csv")  #
-#processFile("D:/WTP/WEEK01_2015test13.csv") #"2014week15.csv")
+#processFile("~/WEEK10_2016.csv")  #
+processFile(csvFile) #"2014week15.csv")
 
 simDogs <- simDogs16
 simFavs <- simFavs16
@@ -52,5 +54,13 @@ confTactics <- function(startList, maxSize = 100){
   outList
 }
 system.time(resultsLists <- confTactics(results05))
+thisDate <- as.character(format(Sys.time(), "%D %I:%M %Z"))
+fileName <- paste0("WTP_confidence/useWeeklyFile2016_", weekNum, ".RData")
 #setwd("D:/Documents/GitHub/fs2/weeklyApp_confidence")
-save(resultsLists, gameRanks, strategies, weekFileConf, file = "WTP_confidence/useWeeklyFile2015_08.RData")
+save(resultsLists, gameRanks, strategies, weekFileConf, thisDate, file = fileName)
+# write.csv(resultsLists, "resultsLists.csv")
+# write.csv(gameRanks, "gameRanks.csv")
+# write.csv(strategies, "strategies.csv")
+# write.csv(weekFileConf, "weekFileConf.csv")
+# resultsLists
+# str(thisDate)

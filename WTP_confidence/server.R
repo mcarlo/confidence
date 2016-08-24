@@ -1,6 +1,9 @@
 library(shiny); library(scales)
 require(googleVis)
-load("useWeeklyFile2015_08.RData")
+weekNum=1
+fileName <- paste0("useWeeklyFile2016_", weekNum, ".RData")
+load(fileName)
+
 nGames <- length(gameRanks)
 
 favorites <- weekFileConf$Victor
@@ -49,6 +52,7 @@ shinyServer(function(input, output) { # input <- data.frame(players = 25, first 
     maxPoints
 
   })
+  
 
   output$ITM1 <- renderTable({
 
