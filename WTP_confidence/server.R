@@ -1,8 +1,15 @@
+rm(list = ls())
+setwd("D:/Documents/GitHub/confidence/WTP_confidence")
+
 library(shiny); library(scales)
 require(googleVis)
 weekNum=1
-fileName <- paste0("useWeeklyFile2016_", weekNum, ".RData")
+fileName <- paste0(ifelse(weekNum > 9, "useWeeklyFile2016_",
+                          "useWeeklyFile2016_0"),
+                          weekNum, ".RData")
 load(fileName)
+# updateTime <- paste0(as.character.Date(Sys.time())," ",
+#                      as.character.Date(Sys.timezone()))
 
 nGames <- length(gameRanks)
 
@@ -44,7 +51,7 @@ shinyServer(function(input, output) { # input <- data.frame(players = 25, first 
     colnames(data1) <- c("Confidence", "Pick")
     maxPoints <- gvisTable(data1,
                            options=list(page='enable', #height=500, width = 300,
-                                      showRowNumber = F, pageSize = nGames,
+                                      showRowNumber = FALSE, pageSize = nGames,
                                         cssClassNames = "{headerRow: 'myTableHeadrow',
                                         tableRow: 'myTablerow'}",
                                         alternatingRowStyle = TRUE, page = 'disable'),
@@ -63,18 +70,24 @@ shinyServer(function(input, output) { # input <- data.frame(players = 25, first 
   }, include.rownames = F)
 
   output$gITM1 <- renderGvis({
-    dataI1 <- as.data.frame(cbind(gameRanks, strategies[,order(-inTheMoney())[1]]))
+    dataI1 <- as.data.frame(cbind(gameRanks, strategies[,order(-inTheMoney())[1]]),
+                            row.names = F)
+    row.names(dataI1) <- NULL
 
     colnames(dataI1) <- c("Confidence", "Pick")
     mostFreq <- gvisTable(dataI1,
                            options=list(page='enable', #height=500, width = 300,
-                                        showRowNumber = F, pageSize = nGames,
+                                        showRowNumber = FALSE, 
+                                        pageSize = nGames,
                                         cssClassNames = "{headerRow: 'myTableHeadrow',
                                         tableRow: 'myTablerow'}",
-                                        alternatingRowStyle = TRUE, page = 'disable'),
+                                        alternatingRowStyle = TRUE, page = 'disable'
+                                        ,showRowNumber = FALSE
+                                        ),
                            chartid = "mostFreqTable")
     mostFreq
 
 })
-
+  output$weekNum <- renderText({paste0("Highest average payoff, Week ", weekNum)})
+  output$updateTime <- renderText({paste0("Updated ", updateTime)})
 })

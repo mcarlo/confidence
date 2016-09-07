@@ -1,8 +1,10 @@
 name: weeklyApp_confidence
 account: portfoliowizards
 server: shinyapps.io
-bundleId: 278872
-url: https://winthatpool.shinyapps.io/weeklyApp_confidence
-when: 1443712188.06848
+appId: 59215
+bundleId: 548315
+url: https://winthatpool.shinyapps.io/weeklyApp_confidence/
+when: 1472923082.83418
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: useWeeklyFile13.RData|useWeeklyFile2015_01.RData|useWeeklyFile2015_02.RData|useWeeklyFile2015_03.RData|useWeeklyFile2015_04.RData|useWeeklyFile2015_05.RData|useWeeklyFile2015_06.RData|useWeeklyFile2015_07.RData|useWeeklyFile2015_08.RData|useWeeklyFile2015_09.RData|useWeeklyFile2015_10.RData|useWeeklyFile2015_11.RData|useWeeklyFile2015_12.RData|useWeeklyFile2015_13.RData|useWeeklyFile2015_14.RData|useWeeklyFile2015_15.RData|useWeeklyFile2015_16.RData|useWeeklyFile2015_17.RData|useWeeklyFile2016_1.RData

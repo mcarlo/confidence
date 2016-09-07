@@ -1,12 +1,14 @@
 ###
 rm(list = ls())
 setwd("D:/Documents/GitHub/confidence")
+weekNum <- 1
+csvFile <- paste0("D:/WTP/WEEK0", weekNum, "_2016.csv" )
 load("fansimsSkeleton.RData")
 load("altStuff.RData")
 source("data_to_load.R") #getwd()
 
 #processFile("~/WEEK10_2015.csv")  #weekfile <- read.csv("D:/WTP/WEEK12_2015.csv", header = T, stringsAsFactors = F)
-processFile("D:/WTP/WEEK13_2015.csv") #"2014week15.csv")
+processFile(csvFile) #processFile("D:/WTP/WEEK13_2015.csv") #"2014week15.csv")
 
 weekFileConf <- weekFileConf[order(weekFileConf$YahooOrder),]
 simDogs <- simDogs16
@@ -73,20 +75,27 @@ findITM <- function(numberFans = 100){#numberFans = 60
   #system.time(sampleBest <- matrix(foreach(j = 1:100, .combine = cbind) %do% apply(totalPointsIter[, sfm[j, ]], 1, findThird), 
   #                                 nrow = 2000))
   winVector <- rep(0, 65536)
-  for (j in 1:5){
+  for (j in 1:numberFans){
     winVector <- winVector + colSums(ptsMult >= sampleBest[, j])
   }
-  winners <- which(winVector == max(winVector))
+  bestScore <- max(winVector)
+  winners <- which(winVector == bestScore)
   winVector[winners]
   comparisonPicks16[, winners]
 }
-weekFileConf$Game
-comparisonPicks16[, 3]
-sum(ptsMult[, 3] > totalPointsVector)
+# weekFileConf$Game
+# comparisonPicks16[, 3]
+#sum(ptsMult[, 3] > totalPointsVector)
 
-findITM(10)
+vecMatch <- function(vec, vec2){
+  sum(vec == vec2) == length(vec)
+}
+
+winners <- findITM(5)
+winColumn <- which(apply(comparisonPicks16, 2, vecMatch, vec2 = winners) == TRUE)
+
 picks <- weekFileConf$Victor
-picks[comparisonPicks16[, winners] == 0] <- weekFileConf$Underdog[comparisonPicks16[, winners] == 0]
-picks[weekFileConf$YahooOrder]
-rank(confPicks(comparisonPicks16[, winners]), ties.method = "random")[weekFileConf$YahooOrder]
-weekFileConf$Game[weekFileConf$YahooOrder]
+picks[comparisonPicks16[, winColumn] == 0] <- weekFileConf$Underdog[comparisonPicks16[, winColumn] == 0]
+cbind(picks[weekFileConf$YahooOrder],
+      rank(confPicks(comparisonPicks16[, winColumn]), ties.method = "random")[weekFileConf$YahooOrder],
+      weekFileConf$Game[weekFileConf$YahooOrder])
